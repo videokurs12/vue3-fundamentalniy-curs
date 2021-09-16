@@ -1,7 +1,11 @@
 <template>
 <div class="app">
-  <post-form/> <!-- Выводим компонент -->
-  <post-list :posts="posts"/> <!-- Выводим компонент, биндим пропсы, более длинная запись такая: v-bind:posts="posts" -->
+  <post-form
+      @create="createPost"
+  /> <!-- Выводим компонент -->
+  <post-list
+      :posts="posts"
+  /> <!-- Выводим компонент, биндим пропсы, более длинная запись такая: v-bind:posts="posts" -->
 
 </div>
 </template>
@@ -20,20 +24,11 @@ export default {
         {id: 1, title: 'Javascript 2', body: 'Описание поста 2'},
         {id: 1, title: 'Javascript 3', body: 'Описание поста 3'},
       ],
-      title: '',
-      body: '',
     }
   },
   methods: {
-    createPost(event) {
-      const newPost = { // Добавляем новую запись
-        id: Date.now(),
-        title: this.title,
-        body: this.body,
-      }
-      this.posts.push(newPost);
-      this.title = ''; // очищаем данные в инпуте после добавления
-      this.body = ''; // очищаем данные в инпуте после добавления
+    createPost(post) {
+      this.posts.push(post);
     },
 
   }

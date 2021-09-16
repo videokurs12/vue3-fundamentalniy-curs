@@ -2,26 +2,20 @@
   <form @submit.prevent>  <!-- Что бы не перезагружалась страница -->
     <h4>Создание поста</h4>
     <input
-        v-bind:value="post.title"
-        @input="post.title = $event.target.value"
+        v-model="post.title"
         class="input"
         type="text"
         placeholder="Название"
-    > <!-- v-bind: связывает какие-то данные с каким-то конкретным компонентом.
-       Отслеживает изменения в инпуте:
-       Вариант 1 : @input="inputTitle" и ниже создаем функцию
-       Вариант 2 : @input="title = $event.target.value" и все, но у меня этот вариант не сработал
-       Меняем Вариант 1 на Вариант 2 и здесь он сработал
-       У меня тормозит то ли phpstorm то ли х.з. бывает клинит-->
+    > <!-- Двухстороннее связывание с использованием диррективы v-model="post.title" -->
     <input
-        v-bind:value="post.body"
-        @input="post.body = $event.target.value"
+        v-model="post.body"
         class="input"
         type="text"
         placeholder="Описание"
     >
     <button
         class="btn"
+        @click="createPost"
     >
       Создать
     </button> <!-- Создаем слушатель нажатия на кнопку -->
@@ -33,6 +27,16 @@ export default {
   data() {
     return {
       post: {
+        title: '',
+        body: '',
+      }
+    }
+  },
+  methods: {
+    createPost() {
+      this.post.id = Date.now();
+      this.$emit('create', this.post)
+      this.post = {
         title: '',
         body: '',
       }
