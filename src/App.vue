@@ -54,6 +54,8 @@ export default {
         body: this.body,
       }
       this.posts.push(newPost);
+      this.title = ''; // очищаем данные в инпуте после добавления
+      this.body = ''; // очищаем данные в инпуте после добавления
     },
     inputTitle(event) {
       this.title = event.target.value; // <!-- Помещаем данные из инпута в переменную -->
