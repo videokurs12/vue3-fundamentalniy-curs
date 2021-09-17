@@ -23,7 +23,9 @@
 </template>
 
 <script>
+import MyButton from "./UI/MyButton";
 export default {
+  components: {MyButton},
   data() {
     return {
       post: {
