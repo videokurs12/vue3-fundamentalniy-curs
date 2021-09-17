@@ -13,17 +13,19 @@
         type="text"
         placeholder="Описание"
     >
-    <button
-        class="btn"
+    <my-button
+        style="align-self: flex-end; margin-top: 15px;"
         @click="createPost"
     >
       Создать
-    </button> <!-- Создаем слушатель нажатия на кнопку -->
+    </my-button> <!-- Создаем слушатель нажатия на кнопку -->
   </form>
 </template>
 
 <script>
+import MyButton from "./UI/MyButton";
 export default {
+  components: {MyButton},
   data() {
     return {
       post: {
@@ -58,12 +60,5 @@ form {
   margin-top: 15px;
 }
 
-.btn {
-  align-self: flex-end;
-  margin-top: 15px;
-  padding: 10px 15px;
-  background: none;
-  color: teal;
-  border: 1px solid teal;
-}
+
 </style>
