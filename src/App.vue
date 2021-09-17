@@ -1,6 +1,7 @@
 <template>
 <div class="app">
   <h1>Страница с постами</h1>
+  <my-button @click="fetchPosts">Получить посты</my-button>
   <my-button
       @click="showDialog"
       style="margin: 15px 0;"
@@ -24,18 +25,18 @@
 <script>
 import PostForm from "./components/PostForm";
 import PostList from "./components/PostList";
+import MyButton from "./components/UI/MyButton";
+import axios from 'axios';
 export default {
   components: {
-    PostList, PostForm
+    PostList, PostForm,
+    MyButton
   },
   data() {
     return {
-      posts: [
-        {id: 1, title: 'Javascript 1', body: 'Описание поста 1'},
-        {id: 2, title: 'Javascript 2', body: 'Описание поста 2'},
-        {id: 3, title: 'Javascript 3', body: 'Описание поста 3'},
-      ],
+      posts: [],
       dialogVisible: false,
+      modificatorValue: '',
     }
   },
   methods: {
@@ -48,6 +49,14 @@ export default {
     },
     showDialog() {
       this.dialogVisible = true;
+    },
+    async fetchPosts() {
+      try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        this.posts = response.data;
+      } catch (e) {
+        alert('Ошибка')
+      }
     }
   }
 }
