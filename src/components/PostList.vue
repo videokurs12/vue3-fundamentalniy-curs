@@ -4,6 +4,8 @@
     <post-item
         v-for="post in posts"
         :post="post"
+        :key="post.id"
+        @remove="$emit('remove', post)"
     />
   </div>
 </template>
@@ -13,7 +15,7 @@ import PostItem from "./PostItem";
 export default {
   components: {PostItem},
   props: {
-    posts: { // Пропсы. В дочернем компоненте изменять нельзя
+    posts: {
       type: Array,
       required: true
     }
